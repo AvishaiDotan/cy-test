@@ -26,12 +26,13 @@ export const Login: React.FC = () => {
             {/* Left side - Image/Pattern */}
             <div className="hidden lg:flex lg:w-1/2 bg-[#6834f4] items-center justify-center p-12">
                 <div className="text-white text-center">
-                    <h1 className="text-4xl font-bold mb-4">Welcome Back</h1>
-                    <p className="text-lg opacity-90">Sign in to continue your journey</p>
+                    <h1 className="text-4xl font-bold mb-4">Cymulate</h1>
+                    <p className="text-2xl font-semibold mb-2">Phishing Attempts Management</p>
+                    <p className="text-lg opacity-90">Sign in to manage your phishing simulation campaigns</p>
                     <div className="mt-8">
                         <div className="w-24 h-24 mx-auto bg-white/10 rounded-full flex items-center justify-center">
                             <svg className="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                             </svg>
                         </div>
                     </div>
@@ -42,8 +43,8 @@ export const Login: React.FC = () => {
             <div className="flex-1 flex items-center justify-center p-8">
                 <div className="w-full max-w-md">
                     <div className="text-center mb-8">
-                        <h2 className="text-3xl font-bold text-white">Sign In</h2>
-                        <p className="mt-2 text-gray-300">Please enter your details</p>
+                        <h2 className="text-3xl font-bold text-white">Welcome Back</h2>
+                        <p className="mt-2 text-gray-300">Sign in to access your phishing management dashboard</p>
                     </div>
 
                     <form onSubmit={handleSubmit} className="space-y-6">

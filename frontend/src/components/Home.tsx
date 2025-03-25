@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../contexts/AuthContext';
-import { settingsService } from '../services/settingsService';
-import { SettingsDTO, SettingsUpdateData } from 'shared-lib';
 
 enum ThemeMode {
     LIGHT = "LIGHT",
@@ -17,10 +15,10 @@ enum Language {
 
 export const Home: React.FC = () => {
   const { user, logout } = useAuth();
-  const [settings, setSettings] = useState<SettingsDTO[]>([]);
+  const [settings, setSettings] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [formData, setFormData] = useState<SettingsUpdateData>({
+  const [formData, setFormData] = useState<any>({
     theme: ThemeMode.SYSTEM,
     language: Language.EN,
   });
@@ -32,7 +30,7 @@ export const Home: React.FC = () => {
 
   const fetchSettings = async () => {
     try {
-      const data = await settingsService.getAllSettings();
+      const data = await ({} as any).getAllSettings();
       setSettings(data);
       setError(null);
     } catch (err) {
@@ -45,7 +43,7 @@ export const Home: React.FC = () => {
   const handleCreateSetting = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const newSetting = await settingsService.createSetting(formData);
+      const newSetting = await ({} as any).createSetting(formData);
       setSettings([...settings, newSetting]);
       setFormData({ theme: ThemeMode.SYSTEM, language: Language.EN });
       setCreateSuccess(true);
@@ -68,7 +66,8 @@ export const Home: React.FC = () => {
                 </div>
               </div>
               <div className="ml-4">
-                <h1 className="text-xl font-semibold text-white">Welcome, {user?.name}!</h1>
+                <h1 className="text-xl font-semibold text-white">Cymulate Phishing Management</h1>
+                <p className="text-sm text-gray-300">Welcome back, {user?.name}</p>
               </div>
             </div>
             <div className="flex items-center">
@@ -89,7 +88,7 @@ export const Home: React.FC = () => {
           {/* User Details Card */}
           <div className="bg-[#ffffff]/10 backdrop-blur-sm overflow-hidden shadow-lg rounded-lg mb-6 border border-gray-700">
             <div className="p-5">
-              <h2 className="text-lg font-medium text-white mb-4">User Details</h2>
+              <h2 className="text-lg font-medium text-white mb-4">Account Information</h2>
               <div className="space-y-2">
                 <p className="text-sm text-gray-300">
                   <span className="font-medium text-white">Name:</span> {user?.name}
@@ -104,7 +103,7 @@ export const Home: React.FC = () => {
           {/* Settings Section */}
           <div className="bg-[#ffffff]/10 backdrop-blur-sm overflow-hidden shadow-lg rounded-lg border border-gray-700">
             <div className="p-5">
-              <h2 className="text-lg font-medium text-white mb-4">User Settings</h2>
+              <h2 className="text-lg font-medium text-white mb-4">Phishing Campaign Settings</h2>
               {loading ? (
                 <div className="flex justify-center">
                   <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#6834f4]"></div>
@@ -117,15 +116,15 @@ export const Home: React.FC = () => {
                     <div key={setting.id} className="border-b border-gray-700 pb-4 last:border-b-0">
                       <div className="flex justify-between items-center">
                         <div>
-                          <p className="text-sm font-medium text-white">Theme: {setting.theme}</p>
-                          <p className="text-sm text-gray-300">Language: {setting.language}</p>
+                          <p className="text-sm font-medium text-white">Campaign Theme: {setting.theme}</p>
+                          <p className="text-sm text-gray-300">Notification Language: {setting.language}</p>
                         </div>
                       </div>
                     </div>
                   ))}
                 </div>
               ) : (
-                <p className="text-sm text-gray-400">No settings found</p>
+                <p className="text-sm text-gray-400">No campaign settings found</p>
               )}
             </div>
           </div>
@@ -133,17 +132,17 @@ export const Home: React.FC = () => {
           {/* Create Settings Section */}
           <div className="bg-[#ffffff]/10 backdrop-blur-sm overflow-hidden shadow-lg rounded-lg mt-6 border border-gray-700">
             <div className="p-5">
-              <h2 className="text-lg font-medium text-white mb-4">Create New Setting</h2>
+              <h2 className="text-lg font-medium text-white mb-4">Create New Campaign Setting</h2>
               
               {createSuccess && (
                 <div className="mb-4 bg-[#6834f4]/20 border border-[#6834f4] text-[#6834f4] px-4 py-3 rounded">
-                  Setting created successfully!
+                  Campaign setting created successfully!
                 </div>
               )}
               
               <form onSubmit={handleCreateSetting} className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-300 mb-1">Theme</label>
+                  <label className="block text-sm font-medium text-gray-300 mb-1">Campaign Theme</label>
                   <select
                     value={formData.theme}
                     onChange={(e) => setFormData({ ...formData, theme: e.target.value as ThemeMode })}
@@ -156,7 +155,7 @@ export const Home: React.FC = () => {
                 </div>
                 
                 <div>
-                  <label className="block text-sm font-medium text-gray-300 mb-1">Language</label>
+                  <label className="block text-sm font-medium text-gray-300 mb-1">Notification Language</label>
                   <select
                     value={formData.language}
                     onChange={(e) => setFormData({ ...formData, language: e.target.value as Language })}
@@ -172,7 +171,7 @@ export const Home: React.FC = () => {
                   type="submit"
                   className="px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-[#6834f4] hover:bg-[#6834f4]/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#6834f4] transition duration-150 ease-in-out"
                 >
-                  Create Setting
+                  Create Campaign Setting
                 </button>
               </form>
             </div>

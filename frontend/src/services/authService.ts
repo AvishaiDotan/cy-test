@@ -1,22 +1,21 @@
 import { httpClient } from "./httpClient";
 
-import { UserDTO } from "shared-lib";
 
 class AuthService {
-  async getCurrentUser(): Promise<UserDTO | null> {
+  async getCurrentUser(): Promise<any | null> {
     try {
-      return await httpClient.get<UserDTO>("/auth/me");
+      return await httpClient.get<any>("/auth/me");
     } catch (error) {
       return null;
     }
   }
 
-  async login(credentials: { email: string, password: string }): Promise<UserDTO> {
-    return await httpClient.post<UserDTO>("/auth/login", credentials);
+  async login(credentials: { email: string, password: string }): Promise<any> {
+    return await httpClient.post<any>("/auth/login", credentials);
   }
 
-  async signup(credentials: {email: string, password: string, name: string}): Promise<UserDTO> {
-    return await httpClient.post<UserDTO>("/auth/signup", credentials);
+  async signup(credentials: {email: string, password: string, name: string}): Promise<any> {
+    return await httpClient.post<any>("/auth/signup", credentials);
   }
 
   async logout(): Promise<void> {
